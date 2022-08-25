@@ -81,7 +81,32 @@ ALTER TABLE "modulo" ADD FORIGN KEY ("id_modulo") REFERENCES ("id_curso")
 -- Popular tabelas:
 
 -- Popular tabela aluno:
--- Popular tabela curso:
+- OBS: não consegui testar essa inserção pois ao rodar a criaçã das tabelas geraram varios erros
+
+INSERT INTO Aluno (id_aluno,cpf,nome,email,cep,cidade,estado,celular,data_nacimento,escolaridade,genero,etnia,curso_id,status_empregabilidade)
+VALUES
+('1','624.783.240-08','Carolina Márcia Sarah Jesus','carolina.jesus@outlook.com','29500970','Alegre','ES','(98)98319-4520','12/07/1990','Ensino Médio Completo','Feminino','negro','1','Em busca de emprego'),
+('2','134.957.110-58','Sebastiana Isis Carvalho','sebastiana.carvalho@outlook.com','25251043','Duque de Caxias','RJ','(68)99648-6921','12/07/1990','Ensino Médio Completo','Não-binário','negro','2','Empregado'),
+('3','319.725.970-00','Francisca Yasmin Rafaela Bernardes','francisca.bernardes@outlook.com','21843970','Rio de Janeiro','RJ','(61)97279-8964','12/07/1990','Ensino Médio Incompleto','Feminino','branco','3','Empregado'),
+('4','376.133.930-54','Osvaldo Diogo Corte Real','osvaldo.real@outlook.com','68702180','Capanema','PA','(32)97936-3914','12/07/1990','Ensino Superior Completo','Masculino','indigena','4','Em busca de emprego'),
+('5','548.636.900-02','Sarah Betina Eloá Galvão','sarah.galvao@outlook.com','89282545','São Bento do Sul','SC','(68)97524-4347','12/07/1990','Ensino Superior Completo','Feminino','negro','5','Em busca de emprego'),
+('6','031.515.740-25','Bernardo Bento Nascimento','bernado.nascimento@outlook.com','29101360','Vila Velha','ES','(96)98769-7425','12/07/1990','Ensino Superiro Incompleto','Não-binário','branco','6','Em busca de emprego'),
+('7','040.893.270-83','Manoel Benício Jorge Campos','manoel.campos@outlook.com','41307230','Salvador','BA','(84)98205-4547','12/07/1990','Ensino Médio Completo','Masculino','branco','7','Empregado'),
+('8','734.806.390-03','Milena Aurora Tatiane Melo','milena.melo@outlook.com','69098600','Manaus','AM','(66)99177-2628','12/07/1990','Ensino Fundamental Completo','Masculino','branco','8','Em busca de emprego'),
+('9','243.520.230-00','Leandro Jorge Thomas Rocha','leandro.rocha@outlook.com','29500970','Alegre','ES','(93)96739-0536','12/07/1990','Ensino Médio Completo','Feminino','negro','9','Em busca de emprego'),
+('10','544.528.720-34','Noah Elias Costa','noah.costa@outlook.com','59124010','Natal','RN','(11)98117-1891','12/07/1990','Ensino Médio Completo','Masculino','negro','10','Em busca de emprego'),
+('11','335.833.950-50','Lucas Fábio da Paz','lucas.paz@outlook.com','13275650','Valinhos','SP','(77)98587-7351','12/07/1990','Ensino Médio Completo','Não-binário','branco','11','Em busca de emprego'),
+('12','009.344.610-15','Elaine Silvana Jaqueline Santos','elaine.santos@outlook.com','17065411','Bauru','SP','(92)98260-1704','12/07/1990','Ensino Médio Completo','Feminino','negro','12','Em busca de emprego'),
+('13','098.660.450-05','Fernanda Sebastiana Nogueira','fernanda.nogueira@outlook.com','12223400','São José dos Campos','SP','(96)96707-4750','12/07/1990','Ensino Médio Completo','Feminino','negro','13','Em busca de emprego'),
+('14','738.985.310-74','Isabelly Carla da Luz','isabelly.luz@outlook.com','29500970','Alegre','ES','(24)98623-6788','12/07/1990','Ensino Médio Completo','Feminino','indigena','14','Empregado'),
+('15','642.993.950-26','Gabrielly Antônia Rafaela da Mata','gabrielly.mata@outlook.com','21843970','Rio de Janeiro','RJ','(91)97146-9961','12/07/1990','Ensino Médio Incompleto','Feminino','negro','15','Em busca de emprego'),
+('16','508.776.320-06','Hadassa Analu Stella Pereira','hadassa.perreira@outlook.com','68702180','Capanema','PA','(82)98752-3446','12/07/1990','Ensino Superior Completo','Feminino','branco','16','Em busca de emprego'),
+('17','564.098.550-01','Filipe Márcio Nathan Gonçalves','filipe.goncalves@outlook.com','89282545','São Bento do Sul','SC','(84)99984-2612','12/07/1990','Ensino Médio Completo','Masculino','branco','17','Em busca de emprego'),
+('18','054.596.290-04','Sarah Alana Freitas','sarah.freitas@outlook.com','29101360','Vila Velha','ES','(67)99813-1215','12/07/1990','Ensino Médio Completo','Feminino','branco','18','Em busca de emprego'),
+('19','336.199.830-11','Anthony Manuel Barbosa','anthony.barbosa@outlook.com','78035565','Cuiabá','MT','(79)98880-7032','12/07/1990','Ensino Médio Completo','Masculino','negro','19','Em busca de emprego'),
+('20','624.783.240-08',João Kauê Porto','joao.porto@outlook.com','76829312','Porto Velho','1','(62)98957-7116','12/07/1990','Ensino Médio Completo','Masculino','negro','20','Em busca de emprego');
+
+ -- Popular tabela curso:
 -- OBS: Retirei a coluna id_módulo porque o módulo depende do curso e não o inverso. No módulo, referenciei o id_curso
 -- OBS2: Acredito que ementa não seja necessário.
 
