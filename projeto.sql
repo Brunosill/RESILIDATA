@@ -77,6 +77,7 @@ ALTER TABLE "matricula" ADD FOREIGN KEY ("id_curso") REFERENCES "curso" ("id_cur
 
 ALTER TABLE "modulo" ADD FOREIGN KEY ("id_curso") REFERENCES "curso" ("id_curso");
 
+
 -- Popular tabelas:
 
 -- Popular tabela aluno:
@@ -103,7 +104,7 @@ VALUES
 ('17','564.098.550-01','Filipe Márcio Nathan Gonçalves','filipe.goncalves@outlook.com','89282545','São Bento do Sul','SC','(84)99984-2612','12/07/1990','Ensino Médio Completo','Masculino','branco','17','Em busca de emprego'),
 ('18','054.596.290-04','Sarah Alana Freitas','sarah.freitas@outlook.com','29101360','Vila Velha','ES','(67)99813-1215','12/07/1990','Ensino Médio Completo','Feminino','branco','18','Em busca de emprego'),
 ('19','336.199.830-11','Anthony Manuel Barbosa','anthony.barbosa@outlook.com','78035565','Cuiabá','MT','(79)98880-7032','12/07/1990','Ensino Médio Completo','Masculino','negro','19','Em busca de emprego'),
-('20','624.783.240-08',João Kauê Porto','joao.porto@outlook.com','76829312','Porto Velho','1','(62)98957-7116','12/07/1990','Ensino Médio Completo','Masculino','negro','20','Em busca de emprego');
+('20','624.783.240-08','João Kauê Porto','joao.porto@outlook.com','76829312','Porto Velho','1','(62)98957-7116','12/07/1990','Ensino Médio Completo','Masculino','negro','20','Em busca de emprego');
 
  -- Popular tabela curso:
 -- OBS: Retirei a coluna id_módulo porque o módulo depende do curso e não o inverso. No módulo, referenciei o id_curso
@@ -131,10 +132,22 @@ VALUES
 (18, 'WebDev Full Stack', '2022-04-22', '2022-10-31', 'Em andamento', 'EmentaDev', 604, 'Noturno'   , ),
 (19, 'Data Analytics'   , '2022-05-16', '2022-11-18', 'Em andamento', 'EmentaDev', 682, 'Vespertino', ),
 (20, 'WebDev Full Stack', '2022-08-29', '2023-03-02', 'Em andamento', 'EmentaDad', 650, 'Noturno'   , ),
-(21, 'Data Anaçytics'   , '2023-01-17', '2023-07-18', 'Programado'  , 'EmentaDev', 650, 'Noturno'   , );
+(21, 'Data Analytics'   , '2023-01-17', '2023-07-18', 'Programado'  , 'EmentaDev', 650, 'Noturno'   , );
 
 
 -- Popular tabela matricula:
 -- Popular tabela modulo:
 -- Popular tabela facilitador:
 
+INSERT INTO facilitador (id_facilitador,nome,cpf,area)
+VALUES
+  (1,'Hunter Blair','439.208.132-14','tech'),
+  (2,'Cedric Payne','675.635.338-87','soft'),
+  (3,'Sydnee Lester','328.121.498-02','tech'),
+  (4,'Ethan Pearson','923.201.546-47','soft'),
+  (5,'Quemby Mendez','854.330.578-60','tech'),
+  (6,'Zachery Reeves','193.831.932-18','tech'),
+  (7,'Adara Koch','528.635.334-85','tech'),
+  (8,'Patience Bender','217.440.397-66','soft'),
+  (9,'Callum Barber','351.461.900-31','tech'),
+  (10,'Lyle Carroll','551.133.856-88','tech');
