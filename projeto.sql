@@ -77,7 +77,6 @@ ALTER TABLE "matricula" ADD FOREIGN KEY ("id_curso") REFERENCES "curso" ("id_cur
 
 ALTER TABLE "modulo" ADD FOREIGN KEY ("id_curso") REFERENCES "curso" ("id_curso");
 
-
 -- Popular tabelas:
 
 -- Popular tabela aluno:
