@@ -86,3 +86,15 @@ ALTER TABLE "modulo" ADD FOREIGN KEY ("id_curso") REFERENCES "curso" ("id_curso"
 -- Popular tabela modulo:
 -- Popular tabela facilitador:
 
+INSERT INTO facilitador (id_facilitador,nome,cpf,area)
+VALUES
+  (1,'Hunter Blair','439.208.132-14','tech'),
+  (2,'Cedric Payne','675.635.338-87','soft'),
+  (3,'Sydnee Lester','328.121.498-02','tech'),
+  (4,'Ethan Pearson','923.201.546-47','soft'),
+  (5,'Quemby Mendez','854.330.578-60','tech'),
+  (6,'Zachery Reeves','193.831.932-18','tech'),
+  (7,'Adara Koch','528.635.334-85','tech'),
+  (8,'Patience Bender','217.440.397-66','soft'),
+  (9,'Callum Barber','351.461.900-31','tech'),
+  (10,'Lyle Carroll','551.133.856-88','tech');
