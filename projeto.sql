@@ -1,20 +1,20 @@
 -- Criar tabela aluno:
 
-CREATE TABLE "aluno" (
+  CREATE TABLE "aluno" (
   "id_aluno" serial PRIMARY KEY,
   "cpf" varchar(14),
   "nome" varchar(50),
-  "email" varchar(30),
-  "cep" varchar(10),
-  "cidade" varchar(30),
+  "email" varchar(50),
+  "cep" varchar(9),
+  "cidade" varchar(50),
   "estado" varchar(2),
   "celular" varchar(14),
   "data_nacimento" date,
-  "escolaridade" varchar(20),
-  "genero" varchar(10),
-  "etnia" varchar(10),
+  "escolaridade" varchar(50),
+  "genero" varchar(20),
+  "etnia" varchar(20),
   "curso_id" int,
-  "status_empregabilidade" varchar(30)
+  "status_empregabilidade" varchar(50)
 );
 
 -- Criar tabela matricula:
@@ -24,6 +24,7 @@ CREATE TABLE "matricula" (
   "id_curso" int,
   "status" varchar(30)
 );
+
 
 -- Criar tabela curso:
 
@@ -40,19 +41,15 @@ CREATE TABLE "curso" (
   "monitor_tech" int
 );
 
--- Criar tabela módulos:
-
 CREATE TABLE "modulo" (
   "id_modulo" serial PRIMARY KEY,
   "id_curso" int,
   "nivel" int,
-  "ementa" varchar(150),
+  "ementa" varchar(250),
   "facilitador_soft" int,
   "facilitador_tech" int,
-  "to_dos" int,
   "carga_horaria" int,
-  "projeto_modulo" int,
-  "status" varchar(20)
+  "status_modulo" varchar(20)
 );
 
 -- Criar tabela facilitador: 
@@ -64,7 +61,7 @@ CREATE TABLE "facilitador" (
   "area" varchar(50)
 );
 
--- Crirar relacionamentos:
+-- Criar relacionamentos:
 
 
 ALTER TABLE "modulo" ADD FOREIGN KEY (facilitador_soft) REFERENCES facilitador ("id_facilitador");
@@ -82,8 +79,9 @@ ALTER TABLE "modulo" ADD FOREIGN KEY ("id_curso") REFERENCES "curso" ("id_curso"
 
 -- Popular tabela aluno:
 
-INSERT INTO Aluno (id_aluno,cpf,nome,email,cep,cidade,estado,celular,data_nacimento,escolaridade,genero,etnia,curso_id,status_empregabilidade)
+INSERT INTO Aluno (cpf,nome,email,cep,cidade,estado,celular,data_nacimento,escolaridade,genero,etnia,curso_id,status_empregabilidade)
 VALUES
+
 ('624.783.240-08','Carolina Márcia Sarah Jesus','carolina.jesus@outlook.com','29500970','Alegre','ES','(98)98319-4520','1990-07-12','Ensino Médio Completo','Feminino','negro','1','Buscando Emprego'),
 ('134.957.110-58','Sebastiana Isis Carvalho','sebastiana.carvalho@outlook.com','25251043','Duque de Caxias','RJ','(68)99648-6921','1990-09-25','Ensino Médio Completo','Não-binário','negro','2','Empregado - Tech'),
 ('319.725.970-00','Francisca Yasmin Rafaela Bernardes','francisca.bernardes@outlook.com','21843970','Rio de Janeiro','RJ','(61)97279-8964','2001-10-28','Ensino Médio Incompleto','Feminino','branco','3','Empregado - Tech'),
@@ -185,38 +183,147 @@ VALUES
 ('161.396.587-59','Charde Kinney','chardekinney@google.edu','39518841','Ipatinga','Minas Gerais','(75)74366-4434','1989-12-12','Ensino Superior Completo','feminino','branco ','6','Empregado - Não Tech'),
 ('714.866.985-26','Clio Donovan','cliodonovan@yahoo.net','83942-822','Cascavel','Paraná','(48)63534-6316','1996-08-03','Ensino Médio Completo','masculino','negro','12','Empregado - Tech');
 
--- Popular tabela curso:
 
-INSERT INTO curso (id_curso, nome,  data_inicio, data_enceramento, status, ementa, carga_horaria, turno, monitor_soft, monitor_tech)
+ -- Popular tabela curso:
+ 
+ 
+INSERT INTO curso (id_curso, nome,  data_inicio, data_enceramento, status, ementa, carga_horaria, turno, facilitador_soft, facilitador_tech)
 VALUES 
-('WebDev Full Stack', '2019-02-06', '2019-08-06', 'Concluído'   , 672, 'Vespertino', 7, 1), 
-('Data Analytics'   , '2019-04-17', '2019-10-17', 'Concluído'   , 650, 'Vespertino', 8, 2),
-('WebDev Full Stack', '2019-06-22', '2019-12-20', 'Concluído'   , 696, 'Noturno'   , 7, 2),
-('Data Analytics'   , '2019-09-05', '2020-03-05', 'Concluído'   , 579, 'Noturno'   , 7, 4),
-('WebDev Full Stack', '2019-12-11', '2020-05-12', 'Concluído'   , 541, 'Noturno'   , 7, 3),
-('Data Analytics'   , '2020-03-15', '2020-09-18', 'Concluído'   , 563, 'Vespertino', 7, 5),
-('WebDev Full Stack', '2020-06-24', '2020-12-28', 'Concluído'   , 600, 'Noturno'   , 9, 2),
-('Data Analytics'   , '2020-08-20', '2021-02-25', 'Concluído'   , 609, 'Noturno'   , 9, 6),
-('WebDev Full Stack', '2020-10-03', '2021-04-07', 'Concluído'   , 591, 'Noturno'   , 7, 3),
-('Data Analytics'   , '2020-12-18', '2021-05-18', 'Concluído'   , 581, 'Vespertino', 8, 1),
-('WebDev Full Stack', '2021-02-08', '2021-08-08', 'Concluído'   , 656, 'Noturno'   , 7, 2),
-('Data Analytics'   , '2021-05-26', '2021-11-28', 'Concluído'   , 650, 'Noturno'   , 9, 4),
-('WebDev Full Stack', '2021-09-26', '2022-03-30', 'Concluído'   , 660, 'Vespertino', 7, 3),
-('Data Analytics'   , '2021-11-14', '2022-04-18', 'Concluído'   , 615, 'Vespertino',10, 1),
-('WebDev Full Stack', '2021-12-20', '2022-05-20', 'Concluído'   , 632, 'Noturno'   , 9, 5),
-('Data Analytics'   , '2022-01-30', '2022-08-01', 'Concluído'   , 678, 'Noturno'   ,10, 5),
-('Data Analytics'   , '2022-03-02', '2022-09-05', 'Em Andamento', 657, 'Vespertino',10, 4),
-('WebDev Full Stack', '2022-04-22', '2022-10-31', 'Em andamento', 604, 'Noturno'   ,10, 5),
-('Data Analytics'   , '2022-05-16', '2022-11-18', 'Em andamento', 682, 'Vespertino', 7, 4),
-('WebDev Full Stack', '2022-08-29', '2023-03-02', 'Em andamento', 650, 'Noturno'   , 8, 3),
-('Data Analytics'   , '2023-01-17', '2023-07-18', 'Programado'  , 650, 'Noturno'   , 9, 3);
+('WebDev Full Stack', '2019-02-06', '2019-08-06', 'Concluído'   , 300, 'Vespertino', 7, 1), 
+('Data Analytics'   , '2019-04-17', '2019-10-17', 'Concluído'   , 300, 'Vespertino', 8, 2),
+('WebDev Full Stack', '2019-06-22', '2019-12-20', 'Concluído'   , 300, 'Noturno'   , 7, 2),
+('Data Analytics'   , '2019-09-05', '2020-03-05', 'Concluído'   , 300, 'Noturno'   , 7, 4),
+('WebDev Full Stack', '2019-12-11', '2020-05-12', 'Concluído'   , 300, 'Noturno'   , 7, 3),
+('Data Analytics'   , '2020-03-15', '2020-09-18', 'Concluído'   , 300, 'Vespertino', 7, 5),
+('WebDev Full Stack', '2020-06-24', '2020-12-28', 'Concluído'   , 300, 'Noturno'   , 9, 2),
+('Data Analytics'   , '2020-08-20', '2021-02-25', 'Concluído'   , 300, 'Noturno'   , 9, 6),
+('WebDev Full Stack', '2020-10-03', '2021-04-07', 'Concluído'   , 300, 'Noturno'   , 7, 3),
+('Data Analytics'   , '2020-12-18', '2021-05-18', 'Concluído'   , 300, 'Vespertino', 8, 1),
+('WebDev Full Stack', '2021-02-08', '2021-08-08', 'Concluído'   , 300, 'Noturno'   , 7, 2),
+('Data Analytics'   , '2021-05-26', '2021-11-28', 'Concluído'   , 300, 'Noturno'   , 9, 4),
+('WebDev Full Stack', '2021-09-26', '2022-03-30', 'Concluído'   , 300, 'Vespertino', 7, 3),
+('Data Analytics'   , '2021-11-14', '2022-04-18', 'Concluído'   , 300, 'Vespertino',10, 1),
+('WebDev Full Stack', '2021-12-20', '2022-05-20', 'Concluído'   , 300, 'Noturno'   , 9, 5),
+('Data Analytics'   , '2022-01-30', '2022-08-01', 'Concluído'   , 360, 'Noturno'   ,10, 5),
+('Data Analytics'   , '2022-03-02', '2022-09-05', 'Em Andamento', 360, 'Vespertino',10, 4),
+('WebDev Full Stack', '2022-04-22', '2022-10-31', 'Em andamento', 360, 'Noturno'   ,10, 5),
+('Data Analytics'   , '2022-05-16', '2022-11-18', 'Em andamento', 360, 'Vespertino', 7, 4),
+('WebDev Full Stack', '2022-08-29', '2023-03-02', 'Em andamento', 360, 'Noturno'   , 8, 3),
+('Data Analytics'   , '2023-01-17', '2023-07-18', 'Programado'  , 360, 'Noturno'   , 9, 3);
 
 -- Popular tabela matricula:
+
 -- Popular tabela modulo:
-
-
+ABORTINSERT into modulo (id_curso, nivel, ementa, facilitador_soft, facilitador_tech, carga_horaria, status_modulo)
+VALUES
+('1', '1º', 'Hard:Páginas estáticas com  HTML5 e CSS3, lógica de programação e Javascript, versionamento de código com Git e Github.Soft: Competências e hábitos para ser um protagonista do seu aprendizado.', '7', '1', 60, 'Concluído'),       
+('1', '2º', 'Hard:Páginas dinâmicas com POO em Javascript, projetos colaborativos de front=end em Git e Github.Soft: Inteligência emocional, trabalho em equipe e relacionamento interpessoal.', '7', '1', 60, 'Concluído'),       
+('1', '3º', 'Hard:Modelagem de banco de dados com foco em BI.Soft: Metodologias Ágeis: SCRUM.', '7', '1', 60, 'Concluído'),       
+('1', '4º', 'Hard:Criação de APIs que interajam com banco de dados. Soft: Postura profissional, criatividade e inovação.', '7', '1', 60, 'Concluído'),    
+('1', '5º', 'Hard:Frameworks, bibliotecas, tecnologias cliente-side front end. Soft: Foco em carreira e processo seletivo.', '7', '1', 60, 'Concluído'),
+('3', '1º', 'Hard:Páginas estáticas com  HTML5 e CSS3, lógica de programação e Javascript, versionamento de código com Git e Github.Soft: Competências e hábitos para ser um protagonista do seu aprendizado.', '7', '2', 60, 'Concluído'),       
+('3', '2º', 'Hard:Páginas dinâmicas com POO em Javascript, projetos colaborativos de front=end em Git e Github. Soft: Inteligência emocional, trabalho em equipe e relacionamento interpessoal.', '7', '2', 60, 'Concluído'),       
+('3', '3º', 'Hard:Modelagem de banco de dados com foco em BI. Soft: Metodologias Ágeis: SCRUM.', '7', '2', 60, 'Concluído'),       
+('3', '4º', 'Hard:Criação de APIs que interajam com banco de dados. Soft: Postura profissional, criatividade e inovação.', '7', '2', 60, 'Concluído'),    
+('3', '5º', 'Hard:Frameworks, bibliotecas, tecnologias cliente-side front end. Soft: Foco em carreira e processo seletivo.', '7', '2', 60, 'Concluído'),     
+('5', '1º', 'Hard:Páginas estáticas com  HTML5 e CSS3, lógica de programação e Javascript, versionamento de código com Git e Github.Soft: Competências e hábitos para ser um protagonista do seu aprendizado.', '7', '3', 60, 'Concluído'),       
+('5', '2º', 'Hard:Páginas dinâmicas com POO em Javascript, projetos colaborativos de front=end em Git e Github.Soft: Inteligência emocional, trabalho em equipe e relacionamento interpessoal.', '7', '3', 60,  'Concluído'),       
+('5', '3º', 'Hard:Modelagem de banco de dados com foco em BI.Soft: Metodologias Ágeis: SCRUM.', '7', '3', 60 ,'Concluído'),       
+('5', '4º', 'Hard:Criação de APIs que interajam com banco de dados. Soft: Postura profissional, criatividade e inovação.', '7', '3', 60,'Concluído'),    
+('5', '5º', 'Hard:Frameworks, bibliotecas, tecnologias cliente-side front end. Soft: Foco em carreira e processo seletivo.', '7', '3', 60, 'Concluído')    
+('7', '1º', 'Hard:Páginas estáticas com  HTML5 e CSS3, lógica de programação e Javascript, versionamento de código com Git e Github.Soft: Competências e hábitos para ser um protagonista do seu aprendizado.', '9', '2',60, 'Concluído'),       
+('7', '2º', 'Hard:Páginas dinâmicas com POO em Javascript, projetos colaborativos de front end em Git e Github.Soft: Inteligência emocional, trabalho em equipe e relacionamento interpessoal.', '9', '2',60, 'Concluído'),       
+('7', '3º', 'Hard:Modelagem de banco de dados com foco em BI.Soft: Metodologias Ágeis: SCRUM.', '9', '2',60, 'Concluído'),       
+('7', '4º', 'Hard:Criação de APIs que interajam com banco de dados. Soft: Postura profissional, criatividade e inovação.', '9', '2', 60, 'Concluído'),    
+('7', '5º', 'Hard:Frameworks, bibliotecas, tecnologias cliente-side front end. Soft: Foco em carreira e processo seletivo.', '9', '2',60,  'Concluído'),
+('9', '1º', 'Hard:Páginas estáticas com  HTML5 e CSS3, lógica de programação e Javascript, versionamento de código com Git e Github.Soft: Competências e hábitos para ser um protagonista do seu aprendizado.', '7', '3',60, 'Concluído'),       
+('9', '2º', 'Hard:Páginas dinâmicas com POO em Javascript, projetos colaborativos de front - end em Git e Github.Soft: Inteligência emocional, trabalho em equipe e relacionamento interpessoal.', '7', '3', 60,'Concluído'),       
+('9', '3º', 'Hard:Modelagem de banco de dados com foco em BI.Soft: Metodologias Ágeis: SCRUM.', '7', '3',60, 'Concluído'),       
+('9', '4º', 'Hard:Criação de APIs que interajam com banco de dados. Soft: Postura profissional, criatividade e inovação.', '7', '3', 60,'Concluído'),    
+('9', '5º', 'Hard:Frameworks, bibliotecas, tecnologias cliente-side front end. Soft: Foco em carreira e processo seletivo.', '7', '3', 60,'Concluído'), 
+('11', '1º','Hard:Páginas estáticas com  HTML5 e CSS3, lógica de programação e Javascript, versionamento de código com Git e Github.Soft: Competências e hábitos para ser um protagonista do seu aprendizado.', '7', '2',60, 'Concluído'),       
+('11', '2º','Hard:Páginas dinâmicas com POO em Javascript, projetos colaborativos de front - end em Git e Github.Soft: Inteligência emocional, trabalho em equipe e relacionamento interpessoal.', '7', '2',60, 'Concluído'),       
+('11', '3º','Hard:Modelagem de banco de dados com foco em BI.Soft: Metodologias Ágeis: SCRUM.', '7', '2', 60,'Concluído'),       
+('11', '4º','Hard: Criação de APIs que interajam com banco de dados. Soft: Postura profissional, criatividade e inovação.', '7', '2',60, 'Concluído'),    
+('11', '5º','Hard:Frameworks, bibliotecas, tecnologias cliente-side front end. Soft: Foco em carreira e processo seletivo.', '7', '2', 60,'Concluído'),   
+('13', '1º','Hard:Páginas estáticas com  HTML5 e CSS3, lógica de programação e Javascript, versionamento de código com Git e Github.Soft: Competências e hábitos para ser um protagonista do seu aprendizado.', '7', '3',60,  'Concluído'),       
+('13', '2º','Hard:Páginas dinâmicas com POO em Javascript, projetos colaborativos de front - end em Git e Github.Soft: Inteligência emocional, trabalho em equipe e relacionamento interpessoal.', '7', '3', 60,'Concluído'),       
+('13', '3º','Hard: Modelagem de banco de dados com foco em BI.Soft: Metodologias Ágeis: SCRUM.', '7', '3',60, 'Concluído'),       
+('13', '4º','Hard:Criação de APIs que interajam com banco de dados. Soft: Postura profissional, criatividade e inovação.', '7', '3', 60,'Concluído'),    
+('13', '5º','Hard:Frameworks, bibliotecas, tecnologias cliente-side front end. Soft: Foco em carreira e processo seletivo.', '9', '5', 60, 'Concluído'), 
+('15', '1º', 'Hard:Páginas estáticas com  HTML5 e CSS3, lógica de programação e Javascript, versionamento de código com Git e Github.Soft: Competências e hábitos para ser um protagonista do seu aprendizado.', '9', '5', 60, 'Concluído'),       
+('15', '2º', 'Hard:Páginas dinâmicas com POO em Javascript, projetos colaborativos de front end em Git e Github.Soft: Inteligência emocional, trabalho em equipe e relacionamento interpessoal.', '9', '5', 60,'Concluído'),       
+('15', '3º', 'Hard:Modelagem de banco de dados com foco em BI.Soft: Metodologias Ágeis: SCRUM.', '9', '5', 60,'Concluído'),       
+('15', '4º', 'Hard:Criação de APIs que interajam com banco de dados. Soft: Postura profissional, criatividade e inovação.', '9', '5',60, 'Concluído'),    
+('15', '5º', 'Hard:Frameworks, bibliotecas, tecnologias cliente-side front end. Soft: Foco em carreira e processo seletivo.', '9', '5',60, 'Concluído'),  
+('18', '1º', 'Hard:Páginas estáticas com  HTML5 e CSS3, lógica de programação e Javascript, versionamento de código com Git e Github.Soft: Competências e hábitos para ser um protagonista do seu aprendizado.', '10', '5', 72,'Concluído'),       
+('18', '2º', 'Hard:Páginas dinâmicas com POO em Javascript, projetos colaborativos de front end em Git e Github.Soft: Inteligência emocional, trabalho em equipe e relacionamento interpessoal.', '10', '5', 72,'Concluído'),       
+('18', '3º', 'Hard:Modelagem de banco de dados com foco em BI.Soft: Metodologias Ágeis: SCRUM.', '10', '5', 72, 'Concluído'),       
+('18', '4º', 'Hard:Criação de APIs que interajam com banco de dados. Soft: Postura profissional, criatividade e inovação.', '10', '5', 72,'Em andamento'),    
+('18', '5º', 'Hard:Frameworks, bibliotecas, tecnologias cliente-side front end. Soft: Foco em carreira e processo seletivo.', '10', '5', 72,'Não iniciado'),    
+('20', '1º', 'Hard:Páginas estáticas com  HTML5 e CSS3, lógica de programação e Javascript, versionamento de código com Git e Github.Soft: Competências e hábitos para ser um protagonista do seu aprendizado.', '8', '3', 72, 'Em andamento'),       
+('20', '2º', 'Hard:Páginas dinâmicas com POO em Javascript, projetos colaborativos de front end em Git e Github.Soft: Inteligência emocional, trabalho em equipe e relacionamento interpessoal.', '8', '3', 72, 'Não iniciado'),       
+('20', '3º', 'Hard:Modelagem de banco de dados com foco em BI.Soft: Metodologias Ágeis: SCRUM.', '8', '3', 72, 'Não iniciado'),      
+('20', '4º', 'Hard:Criação de APIs que interajam com banco de dados. Soft: Postura profissional, criatividade e inovação.' , '8', '3', 72,'Não iniciado'),    
+('20', '5º', 'Hard:Hard:Frameworks, bibliotecas, tecnologias cliente-side front end. Soft: Foco em carreira e processo seletivo.', '8', '3',72, 'Não iniciado'),   
+('2', '1º',  'Hard:Introdução à programação, algoritmo, pensamento computacional e Python (entrada/saída de dados, versionamento de código). Soft: Aprender a aprender, hábitos e técnicas de aprendizagem, gestão de tempo, uso estratégico do LinkedIn.', '8','2',72, 'Concluído'),
+('2', '2º',  'Hard:Estrutura de dados como listas, dicionários, funções, procedimentos e métodos, bibliotecas de dados e ambientes virtuais. Soft: Inteligência emocional, preparação para processos seletivos e entrevistas.', '8','2',72, 'Concluído'),
+('2', '3º',  'Hard:Manipulação de dados estruturados com PostgreSQL. Soft: Dar e receber feedbacks de forma profissional, comunicação não violenta e relacionamento interpessoal.', '8','2', 72,'Concluído'),
+('2', '4º',  'Hard:Estatística descritiva e visualização de dados (Pandas, Google Colab). Soft: Metodologias ágeis: SCRUM.', '8','2', 72, 'Concluído'),
+('2', '5º',  'Hard:Tratamento de dados, visualização com Tableau e storytelling. Soft: Visão de negócio, criatividade, inovação e resolução de problemas.', '8','2',72, 'Concluído'),
+('4', '1º',  'Hard:Introdução à programação, algoritmo, pensamento computacional e Python (entrada/saída de dados, versionamento de código). Soft: Aprender a aprender, hábitos e técnicas de aprendizagem, gestão de tempo, uso estratégico do LinkedIn.', '7','4',72, 'Concluído'),
+('4', '2º',  'Hard:Estrutura de dados como listas, dicionários, funções, procedimentos e métodos, bibliotecas de dados e ambientes virtuais. Soft: Inteligência emocional, preparação para processos seletivos e entrevistas.', '7','4', 72,'Concluído'),
+('4', '3º',  'Hard: Manipulação de dados estruturados com PostgreSQL. Soft: Dar e receber feedbacks de forma profissional, comunicação não violenta e relacionamento interpessoal.', '7','4', 72, 'Concluído'),
+('4', '4º',  'Hard:Estatística descritiva e visualização de dados (Pandas, Google Colab). Soft: Metodologias ágeis: SCRUM.', '7','4',72, 'Concluído'),
+('4', '5º',  'Hard:Tratamento de dados, visualização com Tableau e storytelling. Soft: Visão de negócio, criatividade, inovação e resolução de problemas.', '7','4',72, 'Concluído'),
+('6', '1º',  'Hard:Introdução à programação, algoritmo, pensamento computacional e Python (entrada/saída de dados, versionamento de código). Soft: Aprender a aprender, hábitos e técnicas de aprendizagem, gestão de tempo, uso estratégico do LinkedIn.', '7','5', 72,'Concluído'),
+('6', '2º', 'Hard:Estrutura de dados como listas, dicionários, funções, procedimentos e métodos, bibliotecas de dados e ambientes virtuais. Soft: Inteligência emocional, preparação para processos seletivos e entrevistas.', '7','5', '72,Concluído'),
+('6', '3º', 'Hard:Manipulação de dados estruturados com PostgreSQL. Soft: Dar e receber feedbacks de forma profissional, comunicação não violenta e relacionamento interpessoal.', '7','5',72, 'Concluído'),
+('6', '4º', 'Hard:Estatística descritiva e visualização de dados (Pandas, Google Colab). Soft: Metodologias ágeis: SCRUM.', '7','5', 72, 'Concluído'),
+('6', '5º', 'Hard:Tratamento de dados, visualização com Tableau e storytelling. Soft: Visão de negócio, criatividade, inovação e resolução de problemas.', '7','5',72 'Concluído'),
+('8', '1º', 'Hard:Introdução à programação, algoritmo, pensamento computacional e Python (entrada/saída de dados, versionamento de código). Soft: Aprender a aprender, hábitos e técnicas de aprendizagem, gestão de tempo, uso estratégico do LinkedIn.', '9','6',72, 'Concluído'),
+('8', '2º', 'Hard:Estrutura de dados como listas, dicionários, funções, procedimentos e métodos, bibliotecas de dados e ambientes virtuais. Soft: Inteligência emocional, preparação para processos seletivos e entrevistas.','9','6',72, 'Concluído'),
+('8', '3º', 'Hard:Manipulação de dados estruturados com PostgreSQL. Soft: Dar e receber feedbacks de forma profissional, comunicação não violenta e relacionamento interpessoal.', '9','6', 72,'Concluído'),
+('8', '4º', 'Hard:Estatística descritiva e visualização de dados (Pandas, Google Colab). Soft: Metodologias ágeis: SCRUM.', '9','6', 72, 'Concluído'),
+('8', '5º', 'Hard:Tratamento de dados, visualização com Tableau e storytelling. Soft: Visão de negócio, criatividade, inovação e resolução de problemas.', '9','6', 72,'Concluído'),
+('10', '1º', 'Hard:Introdução à programação, algoritmo, pensamento computacional e Python (entrada/saída de dados, versionamento de código). Soft: Aprender a aprender, hábitos e técnicas de aprendizagem, gestão de tempo, uso estratégico do LinkedIn.', '8','1', 72,'Concluído'),
+('10', '2º', 'Hard:Estrutura de dados como listas, dicionários, funções, procedimentos e métodos, bibliotecas de dados e ambientes virtuais. Soft: Inteligência emocional, preparação para processos seletivos e entrevistas.', '8','1',72, 'Concluído'),
+('10', '3º', 'Hard:Manipulação de dados estruturados com PostgreSQL. Soft: Dar e receber feedbacks de forma profissional, comunicação não violenta e relacionamento interpessoal.', '8','1',72, 'Concluído'),
+('10', '4º', 'Hard:Estatística descritiva e visualização de dados (Pandas, Google Colab). Soft: Metodologias ágeis: SCRUM.','8','1',72, 'Concluído'),
+('10', '5º', 'Hard:Tratamento de dados, visualização com Tableau e storytelling. Soft: Visão de negócio, criatividade, inovação e resolução de problemas.', '8','1',72, 'Concluído'),
+('12', '1º', 'Hard:Introdução à programação, algoritmo, pensamento computacional e Python (entrada/saída de dados, versionamento de código). Soft: Aprender a aprender, hábitos e técnicas de aprendizagem, gestão de tempo, uso estratégico do LinkedIn.', '9','4', 72,'Concluído'),
+('12', '2º', 'Hard:Estrutura de dados como listas, dicionários, funções, procedimentos e métodos, bibliotecas de dados e ambientes virtuais. Soft: Inteligência emocional, preparação para processos seletivos e entrevistas.', '9','4', 72, 'Concluído'),
+('12', '3º', 'Hard:Manipulação de dados estruturados com PostgreSQL. Soft: Dar e receber feedbacks de forma profissional, comunicação não violenta e relacionamento interpessoal.', '9','4',72, 'Concluído'),
+('12', '4º', 'Hard:Estatística descritiva e visualização de dados (Pandas, Google Colab). Soft: Metodologias ágeis: SCRUM.', '9','4', 72, 'Concluído'),
+('12', '5º', 'Hard:Tratamento de dados, visualização com Tableau e storytelling. Soft: Visão de negócio, criatividade, inovação e resolução de problemas.', '10','1', 72, 'Concluído'),
+('14', '1º', 'Hard:Introdução à programação, algoritmo, pensamento computacional e Python (entrada/saída de dados, versionamento de código). Soft: Aprender a aprender, hábitos e técnicas de aprendizagem, gestão de tempo, uso estratégico do LinkedIn.', '10','1', 72 ,'Concluído'),
+('14', '2º', 'Hard:Estrutura de dados como listas, dicionários, funções, procedimentos e métodos, bibliotecas de dados e ambientes virtuais. Soft: Inteligência emocional, preparação para processos seletivos e entrevistas.', '10','1', 72,'Concluído'),
+('14', '3º', 'Hard:Manipulação de dados estruturados com PostgreSQL. Soft: Dar e receber feedbacks de forma profissional, comunicação não violenta e relacionamento interpessoal.', '10','1',72, 'Concluído'),
+('14', '4º', 'Hard:Estatística descritiva e visualização de dados (Pandas, Google Colab). Soft: Metodologias ágeis: SCRUM.', '10','1', 72, 'Concluído'),
+('14', '5º', 'Hard:Tratamento de dados, visualização com Tableau e storytelling. Soft: Visão de negócio, criatividade, inovação e resolução de problemas.', '10','1', 72,'Concluído'),
+('16', '1º', 'Hard:Introdução à programação, algoritmo, pensamento computacional e Python (entrada/saída de dados, versionamento de código). Soft: Aprender a aprender, hábitos e técnicas de aprendizagem, gestão de tempo, uso estratégico do LinkedIn.', '10','5',72, 'Concluído'),
+('16', '2º', 'Hard:Estrutura de dados como listas, dicionários, funções, procedimentos e métodos, bibliotecas de dados e ambientes virtuais. Soft: Inteligência emocional, preparação para processos seletivos e entrevistas.', '10','5',72, 'Concluído'),
+('16', '3º', 'Hard:Manipulação de dados estruturados com PostgreSQL. Soft: Dar e receber feedbacks de forma profissional, comunicação não violenta e relacionamento interpessoal.', '10','5',72, 'Concluído'),
+('16', '4º', 'Hard:Estatística descritiva e visualização de dados (Pandas, Google Colab). Soft: Metodologias ágeis: SCRUM.', '10','5',72, 'Concluído'),
+('16', '5º', 'Hard:Tratamento de dados, visualização com Tableau e storytelling. Soft: Visão de negócio, criatividade, inovação e resolução de problemas.', '10','5', 72,'Concluído'),
+('17', '1º', 'Hard:Introdução à programação, algoritmo, pensamento computacional e Python (entrada/saída de dados, versionamento de código). Soft: Aprender a aprender, hábitos e técnicas de aprendizagem, gestão de tempo, uso estratégico do LinkedIn.', '10','4',72, 'Concluído'),
+('17', '2º', 'Hard:Estrutura de dados como listas, dicionários, funções, procedimentos e métodos, bibliotecas de dados e ambientes virtuais. Soft: Inteligência emocional, preparação para processos seletivos e entrevistas.', '10','4', 72, 'Concluído'),
+('17', '3º', 'Hard:Manipulação de dados estruturados com PostgreSQL. Soft: Dar e receber feedbacks de forma profissional, comunicação não violenta e relacionamento interpessoal.', '10','4',72, 'Concluído'),
+('17', '4º', 'Hard:Estatística descritiva e visualização de dados (Pandas, Google Colab). Soft: Metodologias ágeis: SCRUM.', '10','4',72, 'Concluído'),
+('17', '5º', 'Hard:Tratamento de dados, visualização com Tableau e storytelling. Soft: Visão de negócio, criatividade, inovação e resolução de problemas.', '10','4', 72,'Em andamento'),
+('19', '1º', 'Hard:Introdução à programação, algoritmo, pensamento computacional e Python (entrada/saída de dados, versionamento de código). Soft: Aprender a aprender, hábitos e técnicas de aprendizagem, gestão de tempo, uso estratégico do LinkedIn.', '7','4',72, 'Concluído'),
+('19', '2º', 'Hard:Estrutura de dados como listas, dicionários, funções, procedimentos e métodos, bibliotecas de dados e ambientes virtuais. Soft: Inteligência emocional, preparação para processos seletivos e entrevistas.', '7','4',72, 'Concluído'),
+('19', '3º', 'Hard:Manipulação de dados estruturados com PostgreSQL. Soft: Dar e receber feedbacks de forma profissional, comunicação não violenta e relacionamento interpessoal.', '7','4',72, 'Em andamento'),
+('19', '4º', 'Hard:Estatística descritiva e visualização de dados (Pandas, Google Colab). Soft: Metodologias ágeis: SCRUM.', '7','4',72, 'Não iniciado'),
+('19', '5º', 'Hard:Tratamento de dados, visualização com Tableau e storytelling. Soft: Visão de negócio, criatividade, inovação e resolução de problemas.', '7','4',72, 'Não iniciado'),
+('21', '1º', 'Hard:Introdução à programação, algoritmo, pensamento computacional e Python (entrada/saída de dados, versionamento de código). Soft: Aprender a aprender, hábitos e técnicas de aprendizagem, gestão de tempo, uso estratégico do LinkedIn.', '9','3',72, 'Não iniciado'),
+('21', '2º', 'Hard:Estrutura de dados como listas, dicionários, funções, procedimentos e métodos, bibliotecas de dados e ambientes virtuais. Soft: Inteligência emocional, preparação para processos seletivos e entrevistas.', '9','3',72,'Não iniciado'),
+('21', '3º', 'Hard:Manipulação de dados estruturados com PostgreSQL. Soft: Dar e receber feedbacks de forma profissional, comunicação não violenta e relacionamento interpessoal.', '9','3',72,'Não iniciado'),
+('21', '4º', 'Hard:Estatística descritiva e visualização de dados (Pandas, Google Colab). Soft: Metodologias ágeis: SCRUM.', '9','3',72,'Não iniciado'),
+('21', '5º', 'Hard:Tratamento de dados, visualização com Tableau e storytelling. Soft: Visão de negócio, criatividade, inovação e resolução de problemas.', '9','3',72,'Não iniciado');
+ 
 -- Popular tabela facilitador:
-
+ 
 INSERT INTO facilitador (id_facilitador,nome,cpf,area)
 VALUES
   ('Hunter Blair','439.208.132-14',   'tech'),
@@ -229,7 +336,19 @@ VALUES
   ('Patience Bender','217.440.397-66','soft'),
   ('Callum Barber','351.461.900-31',  'soft'),
   ('Lyle Carroll','551.133.856-88',   'soft');
-
-
-
-
+ 
+ 
+ 
+-- QUERIES:
+ 
+--  QUERY 1: Selecionar a quantidade total de estudantes cadastrados no banco;
+ 
+-- QUERY 2: Selecionar todos os estudantes com os respectivos cursos que eles estão cadastrados;
+ 
+-- QUERY 3: Selecionar quais pessoas facilitadoras atuam em mais de uma turma;
+ 
+-- QUERY 4: Qual a quantidade de pessoas do gênero feminino que fizeram /fazem o curso de WebDev por turma?;
+ 
+-- QUERY 5: Qual a quantidade de alunos que já finalizaram o curso de WebDev e Análise de Dados que já estão trabalhando na área tech?;
+ 
+-- QUERY 6: Qual a porcentagem de alunos avaliados como "colocou tudo em prática" e "provou seu diferencial" no projeto final do módulo 2 da turma atual de Data Analytics?.
