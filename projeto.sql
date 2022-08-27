@@ -1,6 +1,6 @@
 -- Criar tabela aluno:
 
-  CREATE TABLE "aluno" (
+CREATE TABLE "aluno" (
   "id_aluno" serial PRIMARY KEY,
   "cpf" varchar(14),
   "nome" varchar(50),
@@ -13,13 +13,14 @@
   "escolaridade" varchar(50),
   "genero" varchar(20),
   "etnia" varchar(20),
-  "curso_id" int,
+  "id_curso" int,
   "status_empregabilidade" varchar(50)
 );
 
 -- Criar tabela matricula:
 
 CREATE TABLE "matricula" (
+  "id_matricula" serial primary key,
   "id_aluno" int,
   "id_curso" int,
   "status" varchar(50)
@@ -61,7 +62,7 @@ CREATE TABLE "facilitador" (
 -- Criar relacionamentos:
 
 
-ALTER TABLE "modulo" ADD FOREIGN KEY (facilitador_soft) REFERENCES facilitador ("id_facilitador");
+ALTER TABLE "modulo" ADD FOREIGN KEY ("facilitador_soft") REFERENCES "facilitador" ("id_facilitador");
 
 ALTER TABLE "modulo" ADD FOREIGN KEY ("facilitador_tech") REFERENCES "facilitador" ("id_facilitador");
 
@@ -121,7 +122,7 @@ VALUES
 
 -- Popular tabela aluno:
 
-INSERT INTO Aluno (cpf,nome,email,cep,cidade,estado,celular,data_nacimento,escolaridade,genero,etnia,curso_id,status_empregabilidade)
+INSERT INTO Aluno (cpf,nome,email,cep,cidade,estado,celular,data_nacimento,escolaridade,genero,etnia,id_curso ,status_empregabilidade)
 VALUES
 
 ('624.783.240-08','Carolina Márcia Sarah Jesus','carolina.jesus@outlook.com','29500970','Alegre','ES','(98)98319-4520','1990-07-12','Ensino Médio Completo','Feminino','negro',1,'Buscando Emprego'),
@@ -337,6 +338,109 @@ VALUES
 
 -- Popular tabela matricula:
  
+INSERT INTO matricula (id_aluno, id_curso, status)
+VALUES 
+(1,1,'Concluído'),
+(2,2,'Concluído'),
+(3,3,'Concluído'),
+(4,4,'Concluído'),
+(5,5,'Concluído'),
+(6,6,'Concluído'),
+(7,7,'Concluído'),
+(8,8,'Concluído'),
+(9,9,'Concluído'),
+(10,10,'Concluído'),
+(11,11,'Concluído'),
+(12,12,'Concluído'),
+(13,13,'Concluído'),
+(14,14,'Concluído'),
+(15,15,'Concluído'),
+(16,16,'Concluído'),
+(17,17,'Em Andamento'),
+(18,18,'Em andamento'),
+(19,19,'Em andamento'),
+(20,20,'Em andamento'),
+(21,7,'Concluído'),
+(22,6,'Concluído'),
+(23,12,'Concluído'),
+(24,7,'Concluído'),
+(25,19,'Em andamento'),
+(26,6,'Concluído'),
+(27,2,'Concluído'),
+(28,18,'Em andamento'),
+(29,10,'Concluído'),
+(30,12,'Concluído'),
+(31,12,'Concluído'),
+(32,10,'Concluído'),
+(33,4,'Concluído'),
+(34,18,'Em andamento'),
+(35,4,'Concluído'),
+(36,2,'Concluído'),
+(37,4,'Concluído'),
+(38,8,'Concluído'),
+(39,5,'Concluído'),
+(40,12,'Concluído'),
+(41,10,'Concluído'),
+(42,9,'Concluído'),
+(43,16,'Concluído'),
+(44,19,'Em andamento'),
+(45,9,'Concluído'), 
+(46,4,'Concluído'),
+(47,11,'Concluído'),
+(48,19,'Em andamento'),
+(49,3,'Concluído'),
+(50,18,'Em andamento'),
+(51,6,'Concluído'),
+(52,14,'Concluído'),
+(53,14,'Concluído'),
+(54,8,'Concluído'),
+(55,16,'Concluído'),
+(56,12,'Concluído'),
+(57,18,'Em andamento'),
+(58,4,'Concluído'),
+(59,15,'Concluído'),
+(60,6,'Concluído'),
+(61,16,'Concluído'),
+(62,6,'Concluído'),
+(63,13,'Concluído'),
+(64,8,'Concluído'),
+(65,18,'Em andamento'),
+(66,10,'Concluído'),
+(67,10,'Concluído'),
+(68,16,'Concluído'),
+(69,1,'Concluído'),
+(70,18,'Em andamento'),
+(71,16,'Concluído'),
+(72,15,'Concluído'),
+(73,15,'Concluído'),
+(74,10,'Concluído'),
+(75,2,'Concluído'),
+(76,5,'Concluído'),
+(77,12,'Concluído'),
+(78,13,'Concluído'),
+(79,8,'Concluído'),
+(80,13,'Concluído'),
+(81,7,'Concluído'),
+(82,17,'Em Andamento'),
+(83,7,'Concluído'),
+(84,8,'Concluído'),
+(85,18,'Em andamento'),
+(86,9,'Concluído'),
+(87,11,'Concluído'),
+(88,3,'Concluído'),
+(89,6,'Concluído'),
+(90,7,'Concluído'),
+(91,10,'Concluído'),
+(92,4,'Concluído'),
+(93,14,'Concluído'),
+(94,10,'Concluído'),
+(95,19,'Em andamento'),
+(96,10,'Concluído'),
+(97,2,'Concluído'),
+(98,6,'Concluído'),
+(99,6,'Concluído'),
+(100,12,'Concluído');
+
 -- QUERIES:
  
 --  QUERY 1: Selecionar a quantidade total de estudantes cadastrados no banco;
