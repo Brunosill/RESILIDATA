@@ -10,13 +10,13 @@
 
    Bem, a nossa equipe é composta por:
   
-   - [Aline Ester ]()
-   - [Ana Carolina](github.com/amoralles)
-   - [Bruno Guedes](github.com/Brunosill)
-   - [Laura Camargo]()
-   -[Isabelle cavalcante](github.com/isa-sputnik)
+   - [Aline Ester ](https://github.com/enilaester)
+   - [Ana Carolina](https://github.com/amoralles)
+   - [Bruno Guedes](https://github.com/Brunosill)
+   - [Isabelle Cavalcante](https://github.com/isa-sputnik)
+   - [Laura Camargo](https://github.com/LauraCamargo-tech)
   
-   Somos todos estudantes da Resilia Educação, cursando Análise de Dados, possivelmente um dia seremos analistas de dados.
+   Somos todos estudantes da [Resilia Educação](https://www.resilia.com.br/), cursando Análise de Dados, possivelmente um dia seremos analistas de dados.
  
  - **Ok, vocês provavelmente fizeram um belo trabalho em equipe, dá pra mostrar como ficou o banco de dados ?**
  
@@ -28,7 +28,7 @@
    
  - **Nossa, ficou espetacular, aposto que vocês vão tirar a avaliação máxima nisso aí, e como vocês fazem as consultas nisso ?**
  
-   Então, todo o banco foi implementado dentro de um programinha chamado PostgreSQL, é um programa que lê, executa e armazena
+   Então, todo o banco foi implementado dentro de um programinha chamado [PostgreSQL](https://www.postgresql.org/), é um programa que lê, executa e armazena
    scripts SQL, que nada mais são que linhas de código que fazem a inserção de informação dentro de uma base de dados.
    
    Por meio desses scripts, é possível tanto inserir novas informações, visualizar o que contém o nosso banco e fazer pesquisas
@@ -82,3 +82,27 @@
    order by count(id_facilitador) desc
    limit 1;
     ```
+    
+ -  **E como eu faço para testar o repositório de vocês aqui no meu PC?!**
+  
+    É só seguir os seguintes passos, olha só como é fácil:
+    
+    1º - Clonando o repositório para a sua máquina:
+    - Copie a URL: https://github.com/Brunosill/RESILIDATA.git
+    - Execute o seu [Git Bash](https://git-scm.com/downloads)
+     - Escolha o diretório que desejar clonar o repositório 
+    - Digite: git clone https://github.com/Brunosill/RESILIDATA.git
+     - Pressione enter e pronto! 
+     - E em caso de dúvidas, vale a pena olhar a [documentação sobre clonagem, ](https://docs.github.com/pt/repositories/creating-and-managing-repositories/cloning-a-repository)hein? 
+     
+     2º  - Instalar algum gerenciador de banco de dados, como o MySQL, SQL Server ou o PostGreSQL que já mencionamos. Acesse o [tutorial](https://docs.google.com/document/d/1hYfmJQQcQe6Nx39Klx---21RSSVsjWEOxh6yN_0nJQM/edit?usp=sharing) de como instalar o PostgresSQL;
+  
+  A partir de agora, há duas formas de acessar o banco:
+     
+     
+     a) Usando o prompt de comando psql:
+     
+     
+     b) Usando a interface gráfica pgadmin:
+    
+    
