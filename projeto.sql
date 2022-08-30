@@ -69,7 +69,6 @@ CREATE TABLE "projeto_final" (
 
 -- Criar relacionamentos:
 
-
 ALTER TABLE "modulo" ADD FOREIGN KEY ("facilitador_soft") REFERENCES "facilitador" ("id_facilitador");
 
 ALTER TABLE "modulo" ADD FOREIGN KEY ("facilitador_tech") REFERENCES "facilitador" ("id_facilitador");
@@ -971,4 +970,17 @@ VALUES
  
 -- QUERY 5: Qual a quantidade de alunos que já finalizaram o curso de WebDev e Análise de Dados que já estão trabalhando na área tech?;
  
--- QUERY 6: Qual a porcentagem de alunos avaliados como "colocou tudo em prática" e "provou seu diferencial" no projeto final do módulo 2 da turma atual de Data Analytics?.
+-- QUERY 6: Quantos alunos avaliados como "colocou tudo em prática" ou "provou seu diferencial" no projeto final do módulo 2 da primeira turma de Data Analytics?.
+
+select ntb.nota, ntb.qtd_notas
+    from ( select pf.nota_media_soft as nota, count(pf.id_aluno) as qtd_notas
+                from projeto_final as pf
+                inner join curso as cu
+                    on pf.id_curso = cu.id_curso
+                where cu.nome = 'Data Analytics' 
+                    and pf.id_modulo = 2  
+                    and cu.data_inicio < current_timestamp 
+                    and cu.data_enceramento > current_timestamp
+                group by nota ) as ntb
+    where nota = 4 or nota = 5
+    group by 1, 2
