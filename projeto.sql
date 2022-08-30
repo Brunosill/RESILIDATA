@@ -453,7 +453,7 @@ VALUES
 
 -- Popular tabela projetos:
 
-INSERT INTO projeto_final (id_matricula, id_modulo, nota_soft,nota_tech)
+INSERT INTO projeto_final (id_matricula, id_modulo, nota_tech,nota_soft)
 values
 
 (1,1,3,2),
@@ -962,6 +962,7 @@ values
 --  QUERY 1: Selecionar a quantidade total de estudantes cadastrados no banco;
  
 -- QUERY 2: Selecionar todos os estudantes com os respectivos cursos que eles estão cadastrados;
+    -- sugestão a) Quantos alunos cadastrados por curso? Qual curso tem mais aluno cadastrado?
  
 -- QUERY 3: Selecionar quais pessoas facilitadoras atuam em mais de uma turma;
  
@@ -969,17 +970,28 @@ values
  
 -- QUERY 5: Qual a quantidade de alunos que já finalizaram o curso de WebDev e Análise de Dados que já estão trabalhando na área tech?;
  
--- QUERY 6: Quantos alunos avaliados como "colocou tudo em prática" ou "provou seu diferencial" no projeto final do módulo 2 da primeira turma de Data Analytics?.
+-- QUERY 6: Quantos alunos avaliados como "colocou tudo em prática" ou "provou seu diferencial" no projeto final do módulo 1 da(s) turma(s) atual(ais) de Data Analytics?.
 
 select ntb.nota, ntb.qtd_notas
-    from ( select pf.nota_media_soft as nota, count(pf.id_aluno) as qtd_notas
-                from projeto_final as pf
-                inner join curso as cu
-                    on pf.id_curso = cu.id_curso
-                where cu.nome = 'Data Analytics' 
-                    and pf.id_modulo = 2  
-                    and cu.data_inicio < current_timestamp 
-                    and cu.data_enceramento > current_timestamp
-                group by nota ) as ntb
-    where nota = 4 or nota = 5
-    group by 1, 2
+    from(
+        select pf.nota_tech as nota, count(pf.nota_tech) as qtd_notas
+            from projeto_final as pf
+            inner join modulo as md
+                on pf.id_modulo = md.id_modulo 
+            inner join curso as cu
+                on md.id_curso = cu.id_curso
+            where cu.nome = 'Data Analytics' 
+                and md.nivel  = '1º' 
+                and cu.data_inicio < current_timestamp
+                and cu.data_enceramento > current_timestamp
+            group by nota) as ntb
+    where nota = 4 or nota = 5 
+    
+-- QUERY 7: Existe diferença na quantidade de alunos inscritos se a turma for vespertina ou noturna?
+
+select count(mt.id_matricula) as inscritos, cu.turno as turno
+    from matricula as mt
+    left join curso as cu
+        on mt.id_curso = cu.id_curso
+    group by turno
+    
