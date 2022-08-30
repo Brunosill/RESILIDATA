@@ -967,6 +967,19 @@ values
 -- QUERY 3: Selecionar quais pessoas facilitadoras atuam em mais de uma turma;
  
 -- QUERY 4: Qual a quantidade de pessoas do gênero feminino que fizeram /fazem o curso de WebDev por turma?;
+
+select web.nome,web.id_curso as numero_turma, count(web.id_aluno) as qtd_meninas
+	from (
+		select matricula.id_aluno, curso.id_curso, curso.nome
+			from matricula 
+			inner join curso
+				on matricula.id_curso = curso.id_curso
+			where curso.nome = 'WebDev Full Stack') as web
+	inner join aluno
+		on web.id_aluno = aluno.id_aluno
+	where web.id_aluno = aluno.id_aluno and aluno.genero = 'Feminino'
+	group by web.id_curso, web.nome
+  
  
 -- QUERY 5: Qual a quantidade de alunos que já finalizaram o curso de WebDev e Análise de Dados que já estão trabalhando na área tech?;
  
