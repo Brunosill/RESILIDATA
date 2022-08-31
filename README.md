@@ -172,15 +172,19 @@
      3º - Instalar o [DBeaver](https://dbeaver.io/files/dbeaver-ce-latest-x86_64-setup.exe)
      
      4º - Após instalado, clique em criar nova conexão(vide imagem abaixo):
+     
      ![img](https://i.imgur.com/guuX3aa.png)
      
      5º - Em seguida, siga o caminho abaixo para restaurar o script na tabela:
+     
      ![img](https://i.imgur.com/yKpeZAh.png)
      
      6º - Clique no símbolo da pasta indicado, selecione o arquivo .sql baixado e clique em start:
+     
      ![img](https://i.imgur.com/LDjKEgb.png)
      
      7º - Agora é só realizar as consultas, abrindo um novo script e digitando as linhas passadas mais acima !
+     
      ![img](https://i.imgur.com/A30zgO8.png)
   
     
