@@ -960,10 +960,33 @@ values
 -- QUERIES:
  
 --  QUERY 1: Selecionar a quantidade total de estudantes cadastrados no banco;
- 
+ select count(id_aluno)  as "Número de alunos" from aluno;
 -- QUERY 2: Selecionar todos os estudantes com os respectivos cursos que eles estão cadastrados;
     -- sugestão a) Quantos alunos cadastrados por curso? Qual curso tem mais aluno cadastrado?
- 
+  -- a)
+  select c.nome, c.id_curso , count(m.id_aluno) as "Numero de alunos por curso"  from curso c 
+  inner join matricula as m  on m.id_curso  = c.id_curso 
+  inner join aluno as a  on a.id_aluno = m.id_aluno
+  group by c.id_curso 
+  order by c.id_curso;
+
+  -- b)
+  select c.id_aluno, c.nome, count(a.id_aluno)
+  from  curso c
+  inner join matricula m  on m.id_curso  = c.id_curso 
+  inner join aluno a  on a.id_aluno = m.id_aluno
+  group by c.id_curso
+  having count(a.id_aluno) = (
+    select max(numero.n_aluno) from(
+      select count(a.id_aluno) as "n_aluno" 
+      from curso c
+      inner join m  on m.id_curso  = c.id_curso
+      inner join aluno a  on a.id_aluno = m.id_aluno
+      group by c.id_curso
+    ) 
+    as numero
+  )
+
 -- QUERY 3: Selecionar quais pessoas facilitadoras atuam em mais de uma turma;
  
 -- QUERY 4: Qual a quantidade de pessoas do gênero feminino que fizeram /fazem o curso de WebDev por turma?;
