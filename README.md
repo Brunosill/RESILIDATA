@@ -52,31 +52,32 @@
     inner join matricula on matricula.id_aluno = aluno.id_aluno
     inner join curso on curso.id_curso = matricula.id_curso;
    ```
-  
+   
    **Quantos alunos cadastrados por curso ?;**
    ```
-  select c.nome, c.id_curso , count(m.id_aluno) as "Numero de alunos por curso"  from curso c 
-  inner join matricula as m  on m.id_curso  = c.id_curso 
-  inner join aluno as a  on a.id_aluno = m.id_aluno
-  group by c.id_curso 
-  order by c.id_curso;
+   select c.nome, c.id_curso , count(m.id_aluno) as "Numero de alunos por curso"  from curso c 
+   inner join matricula as m  on m.id_curso  = c.id_curso 
+   inner join aluno as a  on a.id_aluno = m.id_aluno
+   group by c.id_curso 
+   order by c.id_curso;
    ```
+   
    **Qual curso tem mais alunos cadastrados ?;**
    ```
-  select c.id_curso, c.nome, count(a.id_aluno) 
-  from curso as c 
-  inner join matricula as m on m.id_curso = c.id_curso 
-  inner join aluno as a on a.id_aluno = m.id_aluno 
-  group by c.id_curso
-  having count(a.id_aluno) = (
-    select max(numero.n_alunos) from(
-      select count(a.id_aluno) as "n_alunos"
-      from curso c 
-      inner join matricula m on m.id_curso = c.id_curso 
-      inner join aluno a on a.id_aluno = m.id_aluno 
-      group by c.id_curso 
-    ) as numero
-  ); 
+	  select c.id_curso, c.nome, count(a.id_aluno) 
+	  from curso as c 
+	  inner join matricula as m on m.id_curso = c.id_curso 
+	  inner join aluno as a on a.id_aluno = m.id_aluno 
+	  group by c.id_curso
+	  having count(a.id_aluno) = (
+	    select max(numero.n_alunos) from(
+	      select count(a.id_aluno) as "n_alunos"
+	      from curso c 
+	      inner join matricula m on m.id_curso = c.id_curso 
+	      inner join aluno a on a.id_aluno = m.id_aluno 
+	      group by c.id_curso 
+	    ) as numero
+	  ); 
    ```
 
    **Selecionar quais pessoas facilitadoras atuam em mais de uma turma;**
@@ -84,7 +85,7 @@
 
    ```
   
-   **Qual a quantidade de pessoas do gênero feminino que fizeram /fazem o curso de WebDev por turma ?;**
+    **Qual a quantidade de pessoas do gênero feminino que fizeram /fazem o curso de WebDev por turma ?;**
    ```
    select web.nome,web.id_curso as numero_turma, count(web.id_aluno) as qtd_meninas
 	from (
@@ -99,7 +100,7 @@
 	group by web.id_curso, web.nome
     ```
     
-**Qual a quantidade de alunos que já finalizaram o curso de WebDev e Análise de Dados e que já estão trabalhando na área tech ?;**
+    **Qual a quantidade de alunos que já finalizaram o curso de WebDev e Análise de Dados e que já estão trabalhando na área tech ?;**
 ```
    select count(matricula.id_matricula), curso.nome 
 	from matricula
@@ -110,7 +111,7 @@
 	group by curso.nome;
 	
 ```
-**Retorne quais são os estudantes de WebDev que se aplicam ao critério anterior:**;
+   **Retorne quais são os estudantes de WebDev que se aplicam ao critério anterior:**;
 ```
    select matricula.id_matricula, aluno.nome
 	from matricula 
@@ -120,7 +121,7 @@
 	and status_empregabilidade='Empregado - Tech'
 	and curso.nome='WebDev Full Stack';
 ```
- **Retorne quais são os estudantes de Análise de Dados que se aplicam ao critério anterior**;
+   **Retorne quais são os estudantes de Análise de Dados que se aplicam ao critério anterior**;
  ```
    select matricula.id_matricula, aluno.nome
 	from matricula 
@@ -130,7 +131,7 @@
 	and status_empregabilidade='Empregado - Tech'
 	and curso.nome='Data Analytics';
  ```
- **Quantos alunos avaliados como "colocou tudo em prática" ou "provou seu diferencial" no projeto final do módulo 1 da(s) turma(s) atual(ais) de Data Analytics?**;
+   **Quantos alunos avaliados como "colocou tudo em prática" ou "provou seu diferencial" no projeto final do módulo 1 da(s) turma(s) atual(ais) de Data Analytics?**;
  ```
  select ntb.nota, ntb.qtd_notas
     from(
@@ -147,7 +148,7 @@
             group by nota) as ntb
     where nota = 4 or nota = 5 
  ```
- **Existe diferença na quantidade de alunos inscritos se a turma for vespertina ou noturna ?**;
+   **Existe diferença na quantidade de alunos inscritos se a turma for vespertina ou noturna ?**;
  ```
  select count(mt.id_matricula) as inscritos, cu.turno as turno
     from matricula as mt
