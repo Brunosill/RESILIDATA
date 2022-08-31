@@ -1,3 +1,5 @@
+----------------------------------------------------------------- CRIANDO TABELAS---------------------------------------------------------------------------------
+
 -- Criar tabela aluno:
 
 CREATE TABLE "aluno" (
@@ -69,7 +71,7 @@ CREATE TABLE "projeto_final" (
   "nota_tech" int 
 );
 
--- Criar relacionamentos:
+---------------------------------------------CRIANDO RELACIONAMENTOS-------------------------------------------------------------------------------------------------
 
 ALTER TABLE "modulo" ADD FOREIGN KEY ("facilitador_soft") REFERENCES "facilitador" ("id_facilitador");
 
@@ -85,7 +87,7 @@ ALTER TABLE "projeto_final" ADD  FOREIGN KEY ("id_matricula") REFERENCES "matric
 
 ALTER TABLE "projeto_final" ADD  FOREIGN KEY ("id_modulo") REFERENCES "modulo" ("id_modulo");
 
--- Popular tabelas:
+--------------------------------------------------------- POPULANDO TABELAS-----------------------------------------------------------------------------------------
 
 -- Popular tabela facilitador
 
@@ -957,20 +959,30 @@ values
 (100,79,4,4),
 (100,80,5,2);
 
--- QUERIES:
+---------------------------------------------------------------- QUERIES: -------------------------------------------------------------------------------------------
  
 --  QUERY 1: Selecionar a quantidade total de estudantes cadastrados no banco;
- select count(id_aluno)  as "Número de alunos" from aluno;
+
+ select count(id_aluno) as "Número de alunos" from aluno;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+ 
 -- QUERY 2: Selecionar todos os estudantes com os respectivos cursos que eles estão cadastrados;
-    -- sugestão a) Quantos alunos cadastrados por curso? Qual curso tem mais aluno cadastrado?
-  -- a)
+
+ select aluno.nome as "Aluno", curso.nome as "Curso"
+ from aluno
+ inner join matricula on matricula.id_aluno = aluno.id_aluno
+ inner join curso on curso.id_curso = matricula.id_curso;
+
+  -- 2.a) Quantos alunos cadastrados por curso? 
+  
   select c.nome, c.id_curso , count(m.id_aluno) as "Numero de alunos por curso"  from curso c 
   inner join matricula as m  on m.id_curso  = c.id_curso 
   inner join aluno as a  on a.id_aluno = m.id_aluno
   group by c.id_curso 
   order by c.id_curso;
 
-  -- b)
+  -- 2.b) Qual curso tem mais alunos cadastrados?
+  
   select c.id_aluno, c.nome, count(a.id_aluno)
   from  curso c
   inner join matricula m  on m.id_curso  = c.id_curso 
@@ -985,9 +997,15 @@ values
       group by c.id_curso
     ) 
     as numero
-  )
-
+  );
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- QUERY 3: Selecionar quais pessoas facilitadoras atuam em mais de uma turma;
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
  
 -- QUERY 4: Qual a quantidade de pessoas do gênero feminino que fizeram /fazem o curso de WebDev por turma?;
 
@@ -1003,9 +1021,42 @@ select web.nome,web.id_curso as numero_turma, count(web.id_aluno) as qtd_meninas
 	where web.id_aluno = aluno.id_aluno and aluno.genero = 'Feminino'
 	group by web.id_curso, web.nome
   
- 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
 -- QUERY 5: Qual a quantidade de alunos que já finalizaram o curso de WebDev e Análise de Dados que já estão trabalhando na área tech?;
+
+
+select count(matricula.id_matricula), curso.nome 
+	from matricula
+	inner join curso on curso.id_curso = matricula.id_curso
+	inner join aluno on aluno.id_aluno = matricula.id_aluno
+	where matricula.status='Concluído'
+	and status_empregabilidade='Empregado - Tech'  
+	group by curso.nome;
+	
+
+ --  5.a) Retorne quais são os estudantes de WebDev que se aplicam ao critério anterior;
  
+ select matricula.id_matricula, aluno.nome
+	from matricula 
+	inner join aluno on aluno.id_aluno = matricula.id_aluno
+	inner join curso on curso.id_curso = matricula.id_curso
+	where matricula.status='Concluído'
+	and status_empregabilidade='Empregado - Tech'
+	and curso.nome='WebDev Full Stack';
+	
+	
+--   5.b) Retorne quais são os estudantes de Análise de Dados que se aplicam ao critério anterior;
+
+  select matricula.id_matricula, aluno.nome
+	from matricula 
+	inner join aluno on aluno.id_aluno = matricula.id_aluno
+	inner join curso on curso.id_curso = matricula.id_curso
+	where matricula.status='Concluído'
+	and status_empregabilidade='Empregado - Tech'
+	and curso.nome='Data Analytics';
+
+ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- QUERY 6: Quantos alunos avaliados como "colocou tudo em prática" ou "provou seu diferencial" no projeto final do módulo 1 da(s) turma(s) atual(ais) de Data Analytics?.
 
 select ntb.nota, ntb.qtd_notas
@@ -1023,6 +1074,9 @@ select ntb.nota, ntb.qtd_notas
             group by nota) as ntb
     where nota = 4 or nota = 5 
     
+    
+ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
 -- QUERY 7: Existe diferença na quantidade de alunos inscritos se a turma for vespertina ou noturna?
 
 select count(mt.id_matricula) as inscritos, cu.turno as turno
@@ -1031,3 +1085,4 @@ select count(mt.id_matricula) as inscritos, cu.turno as turno
         on mt.id_curso = cu.id_curso
     group by turno
     
+---------------------------------------------------------------------------FIM----------------------------------------------------------------------------------------
