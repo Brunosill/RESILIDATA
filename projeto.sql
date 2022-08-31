@@ -983,20 +983,19 @@ values
 
   -- 2.b) Qual curso tem mais alunos cadastrados?
   
-  select c.id_aluno, c.nome, count(a.id_aluno)
-  from  curso c
-  inner join matricula m  on m.id_curso  = c.id_curso 
-  inner join aluno a  on a.id_aluno = m.id_aluno
+  select c.id_curso, c.nome, count(a.id_aluno) 
+  from curso as c 
+  inner join matricula as m on m.id_curso = c.id_curso 
+  inner join aluno as a on a.id_aluno = m.id_aluno 
   group by c.id_curso
   having count(a.id_aluno) = (
-    select max(numero.n_aluno) from(
-      select count(a.id_aluno) as "n_aluno" 
-      from curso c
-      inner join m  on m.id_curso  = c.id_curso
-      inner join aluno a  on a.id_aluno = m.id_aluno
-      group by c.id_curso
-    ) 
-    as numero
+    select max(numero.n_alunos) from(
+      select count(a.id_aluno) as "n_alunos"
+      from curso c 
+      inner join matricula m on m.id_curso = c.id_curso 
+      inner join aluno a on a.id_aluno = m.id_aluno 
+      group by c.id_curso 
+    ) as numero
   );
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- QUERY 3: Selecionar quais pessoas facilitadoras atuam em mais de uma turma;
