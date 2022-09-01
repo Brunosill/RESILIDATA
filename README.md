@@ -1,5 +1,5 @@
-## Projeto-Resilia-3
-# Banco de Dados - Resilia
+## Projeto -Resilia - Módulo 3
+## Banco de Dados - Resilidata
 - **Meu deus, eu não entendo nada de banco de dados, o que é isso que vocês fizeram ?**
 
    Calma lá que eu vou te explicar, nossa equipe fez a coleta de dados de vários setores diferentes da Resilia ( alunos, facilitadores, cursos, etc... )
@@ -22,11 +22,12 @@
  
    Sim, vamos  mostrar pra você, uma forma bem fácil de se visualizar dados, é com diagramas! Saca só o nosso:
    
-   Esse aqui é nosso diagrama relacional:
-   ![img](https://i.imgur.com/CJ9fcs9.png)
+   Esse aqui é nosso diagrama conceitual:
+  ![img](https://i.imgur.com/xs38oaZ.png)
    
-   E esse aqui nosso diagrama lógico:
-   ![img](https://i.imgur.com/xs38oaZ.png)
+   E esse aqui é nosso diagrama lógico:
+   ![img](https://media.discordapp.net/attachments/1006252649525547038/1014657528157704272/logico_TESTE1.png)
+   
    
    Neles você consegue verificar todas as chaves primárias e estrangeiras, e como elas se relacionam dentro do banco de dados.
    
@@ -161,16 +162,16 @@
     É só seguir os seguintes passos, olha só como é fácil:
     
     1º - Clonando o repositório para a sua máquina:
-    - Copie a URL: https://github.com/Brunosill/RESILIDATA.git
-    - Execute o seu [Git Bash](https://git-scm.com/downloads)
-     - Escolha o diretório que desejar clonar o repositório 
+    - Copie a URL: https://github.com/Brunosill/RESILIDATA.git;
+    - Execute o seu [Git Bash](https://git-scm.com/downloads);
+     - Escolha o diretório que desejar clonar o repositório ;
     - Digite: git clone https://github.com/Brunosill/RESILIDATA.git
      - Pressione enter e pronto! 
      - E em caso de dúvidas, vale a pena olhar a [documentação sobre clonagem, ](https://docs.github.com/pt/repositories/creating-and-managing-repositories/cloning-a-repository)hein? 
      
-     2º  - Instalar o PostgreSQL. Acesse o [tutorial](https://docs.google.com/document/d/1hYfmJQQcQe6Nx39Klx---21RSSVsjWEOxh6yN_0nJQM/edit?usp=sharing) de como instalar;
+     2º  - Instalar o [PostgreSQL](https://www.postgresql.org/download/);
      
-     3º - Instalar o [DBeaver](https://dbeaver.io/files/dbeaver-ce-latest-x86_64-setup.exe)
+     3º - Instalar o [DBeaver](https://dbeaver.io/files/dbeaver-ce-latest-x86_64-setup.exe);
      
      4º - Após instalado, clique em criar nova conexão(vide imagem abaixo):
      
