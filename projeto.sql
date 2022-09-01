@@ -1000,9 +1000,17 @@ values
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- QUERY 3: Selecionar quais pessoas facilitadoras atuam em mais de uma turma;
 
-
-
-
+select count(tf.facilitador_soft), fa.nome  from t.modulo tf
+INNER JOIN t.facilitador fa
+ON tf.facilitador_soft = fa.id_facilitador
+GROUP BY fa.id_facilitador
+HAVING count(tf.facilitador_soft)>1
+union
+select count(tf.facilitador_tech) qntd, fa.nome  from t.modulo tf
+INNER JOIN t.facilitador fa
+ON tf.facilitador_tech = fa.id_facilitador
+GROUP BY fa.id_facilitador
+HAVING count(tf.facilitador_tech)>1;
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
  
