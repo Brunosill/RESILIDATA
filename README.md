@@ -56,21 +56,21 @@
    
    **Quantos alunos cadastrados por curso ?;**
    ```
-   select c.nome, c.id_curso , count(m.id_aluno) as "Numero de alunos por curso"  from curso c 
-   inner join matricula as m  on m.id_curso  = c.id_curso 
-   inner join aluno as a  on a.id_aluno = m.id_aluno
-   group by c.id_curso 
-   order by c.id_curso;
+    select c.nome, c.id_curso , count(m.id_aluno) as "Numero de alunos por curso"  from curso c 
+    inner join matricula as m  on m.id_curso  = c.id_curso 
+    inner join aluno as a  on a.id_aluno = m.id_aluno
+    group by c.id_curso 
+    order by c.id_curso;
    ```
    
    **Qual curso tem mais alunos cadastrados ?;**
    ```
-	  select c.id_curso, c.nome, count(a.id_aluno) 
-	  from curso as c 
-	  inner join matricula as m on m.id_curso = c.id_curso 
-	  inner join aluno as a on a.id_aluno = m.id_aluno 
-	  group by c.id_curso
-	  having count(a.id_aluno) = (
+	 select c.id_curso, c.nome, count(a.id_aluno) 
+	 from curso as c 
+	 inner join matricula as m on m.id_curso = c.id_curso 
+	 inner join aluno as a on a.id_aluno = m.id_aluno 
+	 group by c.id_curso
+	 having count(a.id_aluno) = (
 	    select max(numero.n_alunos) from(
 	      select count(a.id_aluno) as "n_alunos"
 	      from curso c 
@@ -83,58 +83,68 @@
 
    **Selecionar quais pessoas facilitadoras atuam em mais de uma turma;**
    ```
-
+    select count(tf.facilitador_soft), fa.nome  from t.modulo tf
+    INNER JOIN t.facilitador fa
+    ON tf.facilitador_soft = fa.id_facilitador
+    GROUP BY fa.id_facilitador
+    HAVING count(tf.facilitador_soft)>1
+      union
+      select count(tf.facilitador_tech) qntd, fa.nome  from t.modulo tf
+      INNER JOIN t.facilitador fa
+      ON tf.facilitador_tech = fa.id_facilitador
+      GROUP BY fa.id_facilitador
+      HAVING count(tf.facilitador_tech)>1;
    ```
   
     **Qual a quantidade de pessoas do gênero feminino que fizeram /fazem o curso de WebDev por turma ?;**
    ```
-   select web.nome,web.id_curso as numero_turma, count(web.id_aluno) as qtd_meninas
-	from (
+    select web.nome,web.id_curso as numero_turma, count(web.id_aluno) as qtd_meninas
+	 from (
 		select matricula.id_aluno, curso.id_curso, curso.nome
 			from matricula 
 			inner join curso
 				on matricula.id_curso = curso.id_curso
 			where curso.nome = 'WebDev Full Stack') as web
-	inner join aluno
+	 inner join aluno
 		on web.id_aluno = aluno.id_aluno
-	where web.id_aluno = aluno.id_aluno and aluno.genero = 'Feminino'
-	group by web.id_curso, web.nome
+	 where web.id_aluno = aluno.id_aluno and aluno.genero = 'Feminino'
+	 group by web.id_curso, web.nome
     ```
     
     **Qual a quantidade de alunos que já finalizaram o curso de WebDev e Análise de Dados e que já estão trabalhando na área tech ?;**
-```
-   select count(matricula.id_matricula), curso.nome 
-	from matricula
-	inner join curso on curso.id_curso = matricula.id_curso
-	inner join aluno on aluno.id_aluno = matricula.id_aluno
-	where matricula.status='Concluído'
-	and status_empregabilidade='Empregado - Tech'  
-	group by curso.nome;
+   ```
+    select count(matricula.id_matricula), curso.nome 
+	 from matricula
+	 inner join curso on curso.id_curso = matricula.id_curso
+	 inner join aluno on aluno.id_aluno = matricula.id_aluno
+	 where matricula.status='Concluído'
+	 and status_empregabilidade='Empregado - Tech'  
+	 group by curso.nome;
 	
-```
+   ```
    **Retorne quais são os estudantes de WebDev que se aplicam ao critério anterior:**;
-```
-   select matricula.id_matricula, aluno.nome
-	from matricula 
-	inner join aluno on aluno.id_aluno = matricula.id_aluno
-	inner join curso on curso.id_curso = matricula.id_curso
-	where matricula.status='Concluído'
-	and status_empregabilidade='Empregado - Tech'
-	and curso.nome='WebDev Full Stack';
-```
+   ```
+    select matricula.id_matricula, aluno.nome
+	 from matricula 
+	 inner join aluno on aluno.id_aluno = matricula.id_aluno
+	 inner join curso on curso.id_curso = matricula.id_curso
+	 where matricula.status='Concluído'
+	 and status_empregabilidade='Empregado - Tech'
+	 and curso.nome='WebDev Full Stack';
+   ```
    **Retorne quais são os estudantes de Análise de Dados que se aplicam ao critério anterior**;
- ```
-   select matricula.id_matricula, aluno.nome
-	from matricula 
-	inner join aluno on aluno.id_aluno = matricula.id_aluno
-	inner join curso on curso.id_curso = matricula.id_curso
-	where matricula.status='Concluído'
-	and status_empregabilidade='Empregado - Tech'
-	and curso.nome='Data Analytics';
- ```
+   ```
+    select matricula.id_matricula, aluno.nome
+	 from matricula 
+	 inner join aluno on aluno.id_aluno = matricula.id_aluno
+	 inner join curso on curso.id_curso = matricula.id_curso
+	 where matricula.status='Concluído'
+	 and status_empregabilidade='Empregado - Tech'
+	 and curso.nome='Data Analytics';
+   ```
    **Quantos alunos avaliados como "colocou tudo em prática" ou "provou seu diferencial" no projeto final do módulo 1 da(s) turma(s) atual(ais) de Data Analytics?**;
- ```
- select ntb.nota, ntb.qtd_notas
+   ```
+    select ntb.nota, ntb.qtd_notas
     from(
         select pf.nota_tech as nota, count(pf.nota_tech) as qtd_notas
             from projeto_final as pf
@@ -148,15 +158,15 @@
                 and cu.data_enceramento > current_timestamp
             group by nota) as ntb
     where nota = 4 or nota = 5 
- ```
+   ```
    **Existe diferença na quantidade de alunos inscritos se a turma for vespertina ou noturna ?**;
- ```
- select count(mt.id_matricula) as inscritos, cu.turno as turno
+   ```
+    select count(mt.id_matricula) as inscritos, cu.turno as turno
     from matricula as mt
     left join curso as cu
         on mt.id_curso = cu.id_curso
     group by turno
- ```
+   ```
  -  **E como eu faço para testar o repositório de vocês aqui no meu PC?!**
   
     É só seguir os seguintes passos, olha só como é fácil:
