@@ -1,10 +1,10 @@
 ## Projeto -Resilia - Módulo 3
-## Banco de Dados - Resilidata
+## Banco de Dados - Resilidata - 
 - **Meu deus, eu não entendo nada de banco de dados, o que é isso que vocês fizeram ?**
 
    Calma lá que eu vou te explicar, nossa equipe fez a coleta de dados de vários setores diferentes da Resilia ( alunos, facilitadores, cursos, etc... )
    e colocamos tudo isso muito bonitinho dentro de tabelas, para facilitar a procura e gestão de dados dentro da empresa, agilizando assim processos que antes
-   demandariam horas.
+   demandariam horas. [Veja também a nossa apresentação em slides!](https://www.canva.com/design/DAFKiGaix_g/o78w2r0JL0Nk5cuW1CAeQQ/edit?utm_content=DAFKiGaix_g&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 - **Tudo bem, já entendi, mas quem faz parte da sua equipe ?**
 
